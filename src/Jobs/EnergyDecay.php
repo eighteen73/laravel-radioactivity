@@ -1,6 +1,6 @@
 <?php
 
-namespace Hacklabs\Trends\Jobs;
+namespace Eighteen73\Radioactivity\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

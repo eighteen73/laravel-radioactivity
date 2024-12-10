@@ -1,16 +1,16 @@
 <?php
 
-namespace Hacklabs\Trends;
+namespace Eighteen73\Radioactivity;
 
 use Illuminate\Support\ServiceProvider;
-use Hacklabs\Trends\Trends;
+use Eighteen73\Radioactivity\Radioactivity;
 
-class TrendsServiceProvider extends ServiceProvider 
+class RadioactivityServiceProvider extends ServiceProvider
 {
 
     public function register () {
-        $this->app->bind('trends', function() {
-            return new Trends();
+        $this->app->bind('radioactivity', function() {
+            return new Radioactivity();
         });
     }
 
@@ -20,10 +20,10 @@ class TrendsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../migrations' => database_path('migrations')
-        ], 'trends_migrations');
+        ], 'radioactivity_migrations');
 
         $this->publishes([
-            __DIR__.'/../config/trends.php' => config_path('trends.php')
+            __DIR__.'/../config/radioactivity.php' => config_path('radioactivity.php')
         ]);
     }
 

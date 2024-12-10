@@ -1,27 +1,21 @@
 {
-    "name": "hacklabsdev/laravel-trends",
-    "description": "Laravel Trends provides a lightweight trending system to your application.",
+    "name": "eighteen73/laravel-radioactivity",
+    "description": "Laravel Radioactivity provides a lightweight trending system to your application.",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Felipe Martins",
-            "email": "felipe@hacklabs.com.br"
-        }
-    ],
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Hacklabs\\Trends\\": "src/"
+            "Eighteen73\\Radioactivity\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Hacklabs\\Trends\\TrendsServiceProvider"
+                "Eighteen73\\Radioactivity\\RadioactivityServiceProvider"
             ],
             "aliases": {
-                "LaravelRating": "Hacklabs\\Trends\\TrendsFacade"
+                "LaravelRating": "Eighteen73\\Radioactivity\\RadioactivityFacade"
             }
         }
     },

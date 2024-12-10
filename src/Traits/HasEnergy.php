@@ -1,26 +1,26 @@
 <?php
 
-namespace Hacklabs\Trends\Traits;
+namespace Eighteen73\Radioactivity\Traits;
 
 use Illuminate\Http\Request;
-use Hacklabs\Trends\Jobs\EnergyDecay;
-use Hacklabs\Trends\Models\Energy;
+use Eighteen73\Radioactivity\Jobs\EnergyDecay;
+use Eighteen73\Radioactivity\Models\Energy;
 use Illuminate\Support\Facades\DB;
 
-trait HasEnergy 
+trait HasEnergy
 {
     public function addEnergy($amount = 1) {
         if(!$this->energy) {
             $this->createEnergy();
         }
         $entity = $this->fresh();
-        if(!in_array(request()->ip(), config('trends.ip_blacklist'))) {
+        if(!in_array(request()->ip(), config('radioactivity.ip_blacklist'))) {
             $this->energy()->update([
                 'amount' => $entity->energy->amount += $amount
             ]);
-            EnergyDecay::dispatch($entity, 0.25)->delay(now()->addHours(config('trends.energy_decay')));
-            EnergyDecay::dispatch($entity, 0.45)->delay(now()->addHours(config('trends.energy_decay') * 2));
-            EnergyDecay::dispatch($entity, 0.30)->delay(now()->addHours(config('trends.energy_decay') * 3));
+            EnergyDecay::dispatch($entity, 0.25)->delay(now()->addHours(config('radioactivity.energy_decay')));
+            EnergyDecay::dispatch($entity, 0.45)->delay(now()->addHours(config('radioactivity.energy_decay') * 2));
+            EnergyDecay::dispatch($entity, 0.30)->delay(now()->addHours(config('radioactivity.energy_decay') * 3));
         }
     }
 

@@ -6,12 +6,12 @@ return [
     | Energy Decay Time
     |--------------------------------------------------------------------------
     |
-    | Defines how long your energy starts to decay in hours. The energy decays 
-    | three times until it returns to 0. For example if value is set to 24 hours 
+    | Defines how long your energy starts to decay in hours. The energy decays
+    | three times until it returns to 0. For example if value is set to 24 hours
     | it would take 3 days to energy return to zero.
     |
     */
-    'energy_decay' => env('TRENDS_DECAY_TIME', 24),
+    'energy_decay' => env('RADIOACTIVITY_DECAY_TIME', 24),
 
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ return [
     |
     */
     'ip_blacklist' => [
-        // 
+        //
     ]
 
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hacklabs\Trends\Models;
+namespace Eighteen73\Radioactivity\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

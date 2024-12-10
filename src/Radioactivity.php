@@ -1,8 +1,8 @@
 <?php
 
-namespace Hacklabs\Trends;
+namespace Eighteen73\Radioactivity;
 
-class Trends
+class Radioactivity
 {
     public function add($model, $amount)
     {

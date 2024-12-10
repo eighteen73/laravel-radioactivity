@@ -1,13 +1,13 @@
 <?php
 
-namespace Hacklabs\Trends;
+namespace Eighteen73\Radioactivity;
 
 use Illuminate\Support\Facades\Facade;
 
-class TrendsFacade extends Facade
+class RadioactivityFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Trends';
+        return 'Radioactivity';
     }
 }
