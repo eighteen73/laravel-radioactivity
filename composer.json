@@ -1,9 +1,26 @@
 {
     "name": "eighteen73/laravel-radioactivity",
     "description": "Laravel Radioactivity provides a lightweight trending system to your application.",
-    "type": "library",
+    "keywords": ["laravel"],
     "license": "MIT",
-    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://github.com/eighteen73/laravel-radioactivity/issues",
+        "source": "https://github.com/eighteen73/laravel-radioactivity"
+    },
+    "authors": [
+        {
+            "name": "Ed Jeavons",
+            "email": "ed@eighteen73.co.uk"
+        }
+    ],
+    "require": {
+        "illuminate/contracts": "^10.0|^11.0",
+        "illuminate/database": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18"
+    },
     "autoload": {
         "psr-4": {
             "Eighteen73\\Radioactivity\\": "src/"
@@ -13,16 +30,9 @@
         "laravel": {
             "providers": [
                 "Eighteen73\\Radioactivity\\RadioactivityServiceProvider"
-            ],
-            "aliases": {
-                "LaravelRating": "Eighteen73\\Radioactivity\\RadioactivityFacade"
-            }
+            ]
         }
     },
-    "require": {
-        "php": "^7.2|^8.0",
-        "illuminate/contracts": "^6.9|^7.0|^8.0",
-        "illuminate/database": "^6.9|^7.0|^8.0",
-        "illuminate/support": "^6.9|^7.0|^8.0"
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
