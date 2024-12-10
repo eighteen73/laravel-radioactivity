@@ -12,6 +12,7 @@ class Radioactivity
     public function getEnergy($model)
     {
         $energy = $model->energy;
+
         return $energy !== null ? (float) $energy->amount : null;
     }
 }

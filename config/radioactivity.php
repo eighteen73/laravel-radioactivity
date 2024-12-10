@@ -24,6 +24,6 @@ return [
     */
     'ip_blacklist' => [
         //
-    ]
+    ],
 
 ];
