@@ -4,6 +4,7 @@ namespace Eighteen73\Radioactivity\Traits;
 
 use Eighteen73\Radioactivity\Jobs\EnergyDecay;
 use Eighteen73\Radioactivity\Models\Energy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait HasEnergy
 {
@@ -28,9 +29,11 @@ trait HasEnergy
         return $this->morphOne(Energy::class, 'energisable');
     }
 
-    public function getEnergyAmountAttribute()
+    public function energyAmount(): Attribute
     {
-        return ($this->energy) ? (float) $this->energy->amount : 0;
+        return Attribute::get(function (): float {
+            return (float) $this->energy?->amount ?? 0;
+        });
     }
 
     public function decayEnergy($amount)
