@@ -39,7 +39,7 @@ trait HasEnergy
         $builder->select($model->getTable().'.*');
         $builder->leftJoin($table, function (JoinClause $join) use ($model) {
             $relation = $model->energy();
-            $join->on("{$relation->getQualifiedForeignKeyName()}", '=', "{$model->getTable()}.{$model->getKeyName()}")
+            $join->on($relation->getQualifiedForeignKeyName(), '=', $model->getQualifiedKeyName())
                 ->where($relation->getMorphType(), '=', $relation->getMorphClass());
         });
         $builder->orderBy("{$table}.amount", $direction);
