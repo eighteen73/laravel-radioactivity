@@ -69,9 +69,8 @@ $model->energy->amount;
 ## Examples
 
 ```php
-$models = MyModel::all();
-
-$orderedModels = $models->sortByDesc('energy_amount');
+# Get Ordered Models by energy (DESC by default)
+$orderedModels = MyModel::orderByEnergy('desc')->get();
 ```
 
 The above code creates a ordered list of items based on radioactivity.
