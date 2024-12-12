@@ -4,11 +4,50 @@ namespace Eighteen73\Radioactivity\Traits;
 
 use Eighteen73\Radioactivity\Jobs\EnergyDecay;
 use Eighteen73\Radioactivity\Models\Energy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Query\JoinClause;
 
 trait HasEnergy
 {
-    public function addEnergy($amount = 1)
+    public static function bootHasEnergy(): void
+    {
+        HasMany::macro('orderByEnergy', function (string $direction = 'desc') {
+            return $this->getRelated()->joinEnergyAndSort($this->getQuery(), $this->getRelated(), $direction);
+        });
+
+        Builder::macro('orderByEnergy', function (string $direction = 'desc') {
+            return $this->getModel()->joinEnergyAndSort($this->getQuery(), $this->getModel(), $direction);
+        });
+    }
+
+    public static function getEnergyTable(): string
+    {
+        return (new Energy)->getTable();
+    }
+
+    public function joinEnergyAndSort(Builder $builder, Model $model, string $direction = 'desc'): Builder
+    {
+        if (! in_array(HasEnergy::class, class_uses($model), true)) {
+            throw new \Exception(sprintf('Model %s does not have the HasEnergy trait.', $model));
+        }
+
+        $table = self::getEnergyTable();
+        $builder->select($model->getTable().'.*');
+        $builder->leftJoin($table, function (JoinClause $join) use ($model) {
+            $relation = $model->energy();
+            $join->on($relation->getQualifiedForeignKeyName(), '=', $model->getQualifiedKeyName())
+                ->where($relation->getMorphType(), '=', $relation->getMorphClass());
+        });
+        $builder->orderBy("{$table}.amount", $direction);
+
+        return $builder;
+    }
+
+    public function addEnergy($amount = 1): void
     {
         if (! $this->energy) {
             $this->createEnergy();
@@ -24,7 +63,7 @@ trait HasEnergy
         }
     }
 
-    public function energy()
+    public function energy(): MorphOne
     {
         return $this->morphOne(Energy::class, 'energisable');
     }
@@ -36,19 +75,19 @@ trait HasEnergy
         });
     }
 
-    public function decayEnergy($amount)
+    public function decayEnergy($amount): void
     {
         $this->energy()->update([
             'amount' => $this->energy->amount -= $amount,
         ]);
     }
 
-    public function getEntityName()
+    public function getEntityName(): string
     {
         return str_slug(get_class($this).' '.$this->id);
     }
 
-    public function createEnergy()
+    public function createEnergy(): Energy
     {
         return $this->energy()->create([
             'amount' => 0,
