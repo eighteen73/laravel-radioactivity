@@ -2,7 +2,6 @@
 
 namespace Eighteen73\Radioactivity\Traits;
 
-use Eighteen73\Radioactivity\Jobs\EnergyDecay;
 use Eighteen73\Radioactivity\Models\Energy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -47,7 +46,7 @@ trait HasEnergy
         return $builder;
     }
 
-    public function addEnergy($amount = 1): void
+    public function addEnergy(int|float $amount = 1000): void
     {
         if (! $this->energy) {
             $this->createEnergy();
@@ -57,9 +56,6 @@ trait HasEnergy
             $this->energy()->update([
                 'amount' => $entity->energy->amount += $amount,
             ]);
-            EnergyDecay::dispatch($entity, 0.25)->delay(now()->addHours(config('radioactivity.energy_decay')));
-            EnergyDecay::dispatch($entity, 0.45)->delay(now()->addHours(config('radioactivity.energy_decay') * 2));
-            EnergyDecay::dispatch($entity, 0.30)->delay(now()->addHours(config('radioactivity.energy_decay') * 3));
         }
     }
 
@@ -75,7 +71,7 @@ trait HasEnergy
         });
     }
 
-    public function decayEnergy($amount): void
+    public function decayEnergy(int|float $amount): void
     {
         $this->energy()->update([
             'amount' => $this->energy->amount -= $amount,
@@ -92,5 +88,10 @@ trait HasEnergy
         return $this->energy()->create([
             'amount' => 0,
         ]);
+    }
+
+    public static function getHalfLife(): int
+    {
+        return config('radioactivity.half_life', 24);
     }
 }
