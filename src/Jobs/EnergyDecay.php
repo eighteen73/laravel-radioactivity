@@ -17,7 +17,7 @@ class EnergyDecay implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public const RUN_EVERY = 60;
+    public const RUN_EVERY = 5;
 
     /**
      * Create a new job instance.
