@@ -36,7 +36,15 @@ But how can a trend be detected? Imagine that thousands of people hit the same i
 
 ## Configuration
 
-To configure your decaying time you can set the `energy_decay` parameter in `config/radioactivity.php`. The decaying time is measured in hours.
+To configure your decaying time you can set the `half_life` and `min_energy` parameters in `config/radioactivity.php`. The half life is measured in hours.
+
+If you want to auto-decay the energy on your models then you also need to add your model to the `models` section.
+
+```php
+'models' => [
+    \App\Models\MyModel::class,
+],
+```
 
 ## Preparing your model
 
@@ -54,16 +62,25 @@ class MyModel extends Model
 ```
 ## Usage
 
-To add energy to your model use the following method:
+To add energy to your model use the following method. By default, 1000 energy is added each time to avoid lots of floating points, but any desired amount can be added by specifying the `$amount` parameter.
 
 ```php
-$model->addEnergy(1);
+$model->addEnergy();    // Adds 1000 energy
+$model->addEnergy(100); // Adds 100 energy
 ```
 
 To get the current value:
 
 ```php
 $model->energy->amount;
+```
+
+## Schedule
+
+This package uses Laravel Schedule to queue decay jobs for each Model type you configure. Make sure you are running [Laravel's Schedule via cron](https://laravel.com/docs/11.x/scheduling#running-the-scheduler) every minute.
+
+```
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## Examples
