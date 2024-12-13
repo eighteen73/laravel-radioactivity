@@ -3,15 +3,27 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Energy Decay Time
+    | Default Delay Half Life (hours)
     |--------------------------------------------------------------------------
     |
-    | Defines how long your energy starts to decay in hours. The energy decays
-    | three times until it returns to 0. For example if value is set to 24 hours
-    | it would take 3 days to energy return to zero.
+    | Defines the half life of an element. This is the average time it would
+    | take for an element's radioactivity to each 50% of it's initial
+    | starting value.
     |
     */
-    'energy_decay' => env('RADIOACTIVITY_DECAY_TIME', 24),
+    'half_life' => env('RADIOACTIVITY_HALF_LIFE', 24),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Minimum energy
+    |--------------------------------------------------------------------------
+    |
+    | Defines the minimum energy a model can have before being pruned from the
+    | energies table. This stops the energies table becoming enormously
+    | massive when a lot of content is present, and keeps content relevant.
+    |
+    */
+    'min_energy' => env('RADIOACTIVITY_MIN_ENERGY', 1),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,4 +38,27 @@ return [
         //
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Models
+    |--------------------------------------------------------------------------
+    |
+    | Defines models here you would like to automatically decay on a schedule.
+    | Every 5 minutes a job will be queued to simulate delay of energy
+    | over time, based on the half life specified above.
+    |
+    */
+    'models' => [
+        // \App\Models\Post::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue
+    |--------------------------------------------------------------------------
+    |
+    | The queue to dispatch the delay onto.
+    |
+    */
+    'queue' => 'default',
 ];
