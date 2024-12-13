@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Default Delay Half Life (hours)
+    | Default Decay Half Life (hours)
     |--------------------------------------------------------------------------
     |
     | Defines the half life of an element. This is the average time it would
@@ -44,7 +44,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Defines models here you would like to automatically decay on a schedule.
-    | Every 5 minutes a job will be queued to simulate delay of energy
+    | Every 5 minutes a job will be queued to simulate decay of energy
     | over time, based on the half life specified above.
     |
     */
@@ -57,7 +57,7 @@ return [
     | Queue
     |--------------------------------------------------------------------------
     |
-    | The queue to dispatch the delay onto.
+    | The queue to dispatch the decay onto.
     |
     */
     'queue' => 'default',
