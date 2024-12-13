@@ -30,9 +30,11 @@ php artisan migrate
 
 ## How it works
 
-Laravel Radioactivity allows you to create a trending system for any model you want. E.g. it receives 1 point of energy per hit, but after 30 minutes this single point of energy decays 0.25 of it's value. After more 30 minutes it decays 0.45 points of it's value. Finally, after another 30 minutes it decays 0.30 of its value returning to 0.
+Laravel Radioactivity allows you to create a trending system for any model you want. E.g. assuming a `half_life` set to `24`, and receiving 1000 points of energy initially, after 24 hours this energy would be now 500, and continues to decrement exponentially according to the decay equation.
 
-But how can a trend be detected? Imagine that thousands of people hit the same item at the same time, this item will have thousands of energy points and if you have an ordered list of items this one will surely be on top, but after a few minutes if this item doesn't receive any more energy points it will start to loose it's energy and decay over time.
+But how can a trend be detected? Imagine that thousands of people hit the same item at the same time, this item will have thousands of energy points and if you have an ordered list of items this one will surely be on top, but after some time if this item doesn't receive any more energy points it will start to lose its energy and decay over time.
+
+To help avoid the energies table growing too large to sort, this package also prunes models with very low energy (according to your `min_energy` setting).
 
 ## Configuration
 
