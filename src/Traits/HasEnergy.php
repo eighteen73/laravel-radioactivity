@@ -54,7 +54,7 @@ trait HasEnergy
         $entity = $this->fresh();
         if (! in_array(request()->ip(), config('radioactivity.ip_blacklist'))) {
             $this->energy()->update([
-                'amount' => $entity->energy->amount += $amount,
+                'amount' => $entity->energy->amount + $amount,
             ]);
         }
     }
@@ -74,7 +74,7 @@ trait HasEnergy
     public function decayEnergy(int|float $amount): void
     {
         $this->energy()->update([
-            'amount' => $this->energy->amount -= $amount,
+            'amount' => $this->energy->amount - $amount,
         ]);
     }
 
