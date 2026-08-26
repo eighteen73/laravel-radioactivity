@@ -8,6 +8,6 @@ class RadioactivityFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Radioactivity';
+        return 'radioactivity';
     }
 }

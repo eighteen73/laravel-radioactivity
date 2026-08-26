@@ -30,7 +30,10 @@
         "laravel": {
             "providers": [
                 "Eighteen73\\Radioactivity\\RadioactivityServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Radioactivity": "Eighteen73\\Radioactivity\\RadioactivityFacade"
+            }
         }
     },
     "minimum-stability": "dev",
