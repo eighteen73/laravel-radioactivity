@@ -4,7 +4,7 @@ namespace Eighteen73\Radioactivity;
 
 class Radioactivity
 {
-    public function add($model, $amount)
+    public function add($model, int|float $amount = 1000)
     {
         return $model->addEnergy($amount);
     }
