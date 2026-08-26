@@ -7,7 +7,7 @@ Give your eloquent models energy so the most active items are easy to find, with
 ## Requirements
 
 - PHP 8.2 or higher
-- Laravel 11 or 12
+- Laravel 11+
 
 ## Prerequisites
 
