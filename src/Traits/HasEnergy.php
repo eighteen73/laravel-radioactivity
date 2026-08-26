@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Str;
 
 trait HasEnergy
 {
@@ -80,7 +81,7 @@ trait HasEnergy
 
     public function getEntityName(): string
     {
-        return str_slug(get_class($this).' '.$this->id);
+        return Str::slug(get_class($this).' '.$this->id);
     }
 
     public function createEnergy(): Energy
